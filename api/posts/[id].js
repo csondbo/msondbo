@@ -1,10 +1,12 @@
 import { createClient } from '@supabase/supabase-js';
 import jwt from 'jsonwebtoken';
 
-const supabase = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_KEY
-);
+function getSupabase() {
+  return createClient(
+    process.env.SUPABASE_URL,
+    process.env.SUPABASE_SERVICE_KEY
+  );
+}
 
 function isAuthed(req) {
   const auth = req.headers['authorization'] || '';
@@ -28,6 +30,7 @@ export default async function handler(req, res) {
 
   if (req.method === 'PUT') {
     const body = req.body || {};
+    const supabase = getSupabase();
     const { data, error } = await supabase
       .from('posts')
       .update({ title: body.title, content: body.content, published: body.published })
@@ -39,6 +42,7 @@ export default async function handler(req, res) {
   }
 
   if (req.method === 'DELETE') {
+    const supabase = getSupabase();
     const { error } = await supabase.from('posts').delete().eq('id', id);
     if (error) return res.status(500).json({ error: error.message });
     return res.status(200).json({ ok: true });

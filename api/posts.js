@@ -1,10 +1,12 @@
 import { createClient } from '@supabase/supabase-js';
 import jwt from 'jsonwebtoken';
 
-const supabase = createClient(
-  process.env.SUPABASE_URL,
-  process.env.SUPABASE_SERVICE_KEY
-);
+function getSupabase() {
+  return createClient(
+    process.env.SUPABASE_URL,
+    process.env.SUPABASE_SERVICE_KEY
+  );
+}
 
 function isAuthed(req) {
   const auth = req.headers['authorization'] || '';
@@ -24,16 +26,22 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(204).end();
 
   if (req.method === 'GET') {
-    let query = supabase.from('posts').select('*').order('date', { ascending: false });
-    if (!isAuthed(req)) query = query.eq('published', true);
-    const { data, error } = await query;
-    if (error) return res.status(500).json({ error: error.message });
-    return res.status(200).json(data);
+    try {
+      const supabase = getSupabase();
+      let query = supabase.from('posts').select('*').order('date', { ascending: false });
+      if (!isAuthed(req)) query = query.eq('published', true);
+      const { data, error } = await query;
+      if (error) return res.status(500).json({ error: error.message });
+      return res.status(200).json(data);
+    } catch (err) {
+      return res.status(500).json({ error: err.message });
+    }
   }
 
   if (req.method === 'POST') {
     if (!isAuthed(req)) return res.status(401).json({ error: 'Ikke innlogget' });
     const body = req.body || {};
+    const supabase = getSupabase();
     const { data, error } = await supabase
       .from('posts')
       .insert({
