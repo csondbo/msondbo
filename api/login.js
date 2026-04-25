@@ -1,16 +1,5 @@
-import fs from 'fs';
-import path from 'path';
-import { randomBytes } from 'crypto';
-
-const CONFIG_FILE = path.join(process.cwd(), 'blog-config.json');
-
-// Shared sessions store (in-memory, per function instance)
-export const sessions = new Map();
-
-function getPassword() {
-  try { return JSON.parse(fs.readFileSync(CONFIG_FILE, 'utf8')).password; }
-  catch { return null; }
-}
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 
 function setCors(res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -20,17 +9,17 @@ function setCors(res) {
 
 export default async function handler(req, res) {
   setCors(res);
-
   if (req.method === 'OPTIONS') return res.status(204).end();
 
   if (req.method === 'POST') {
     const body = req.body || {};
-    const correct = getPassword();
-    if (!correct || body.password !== correct) {
-      return res.status(401).json({ error: 'Feil passord' });
-    }
-    const token = randomBytes(32).toString('hex');
-    sessions.set(token, { expires: Date.now() + 8 * 60 * 60 * 1000 });
+    const hash = process.env.ADMIN_PASSWORD_HASH;
+    if (!hash || !body.password) return res.status(401).json({ error: 'Feil passord' });
+
+    const match = await bcrypt.compare(body.password, hash);
+    if (!match) return res.status(401).json({ error: 'Feil passord' });
+
+    const token = jwt.sign({ admin: true }, process.env.JWT_SECRET, { expiresIn: '8h' });
     return res.status(200).json({ token });
   }
 
