@@ -1,0 +1,5 @@
+node_modules/
+temporary screenshots/
+blog-config.json
+.DS_Store
+.claude/
