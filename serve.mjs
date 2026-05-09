@@ -122,6 +122,7 @@ http.createServer(async (req, res) => {
       content:   (body.content || '').trim(),
       date:      new Date().toISOString(),
       published: body.published !== false,
+      image_url: body.image_url || null,
     };
     posts.unshift(post);
     writePosts(posts);
