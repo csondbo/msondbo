@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Andre kronikker — Mildrid Haugrønning Søndbø</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,200;0,9..144,300;0,9..144,400;1,9..144,200;1,9..144,300;1,9..144,400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --forest: #3D2B20; --forest-deep: #231510;
+  --sage: #9E8B72; --sage-light: #C4B8A4;
+  --terra: #D9664F; --cream: #F5F0EB; --cream-warm: #EAE0CC; --ink: #211510;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', system-ui, sans-serif; background: var(--cream); color: var(--ink); overflow-x: hidden; min-height: 100vh; }
+body::before {
+  content: ''; position: fixed; inset: 0; z-index: 9999; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: 0.6; mix-blend-mode: multiply;
+}
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  background: rgba(245,240,235,0.9); backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(61,43,32,0.07);
+  padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo { font-family: 'Fraunces', serif; font-weight: 300; font-size: 1.05rem; color: var(--forest); text-decoration: none; letter-spacing: -0.01em; }
+.nav-logo em { font-style: italic; }
+.nav-back { font-size: 0.8rem; color: var(--terra); text-decoration: none; font-weight: 500; letter-spacing: 0.04em; display: flex; align-items: center; gap: 0.35rem; transition: gap 0.2s; }
+.nav-back:hover { gap: 0.6rem; }
+
+.container { max-width: 860px; margin: 0 auto; padding: 0 2rem; }
+.page-header { padding: 8rem 0 3.5rem; }
+.eyebrow { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--terra); display: inline-flex; align-items: center; gap: 0.65rem; margin-bottom: 0.75rem; }
+.eyebrow::before { content: ''; display: block; width: 1.5rem; height: 1px; background: currentColor; }
+.page-title { font-family: 'Fraunces', serif; font-weight: 200; font-size: clamp(2.2rem, 5vw, 3.5rem); color: var(--forest); letter-spacing: -0.035em; line-height: 1.05; margin-bottom: 0.75rem; }
+.page-title em { font-style: italic; }
+.page-sub { font-size: 1rem; line-height: 1.75; color: rgba(33,21,16,0.5); font-weight: 300; max-width: 560px; }
+
+.articles-list { padding-bottom: 6rem; }
+
+.outlet-group { margin-bottom: 3rem; }
+.outlet-label {
+  font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase;
+  font-weight: 600; color: rgba(33,21,16,0.35);
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(61,43,32,0.1);
+  margin-bottom: 0;
+}
+
+.article-item {
+  display: flex; align-items: baseline; gap: 1.5rem;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid rgba(61,43,32,0.07);
+  transition: background 0.15s;
+}
+.article-item:last-child { border-bottom: none; }
+.article-num {
+  font-family: 'Fraunces', serif; font-size: 0.78rem; font-weight: 300;
+  color: var(--terra); opacity: 0.6; flex-shrink: 0; min-width: 1.5rem;
+}
+.article-title {
+  font-family: 'Fraunces', serif; font-size: 1.05rem; font-weight: 300;
+  color: var(--forest); line-height: 1.4; letter-spacing: -0.01em;
+}
+
+@media (max-width: 600px) { .container { padding: 0 1.25rem; } nav { padding: 1rem 1.25rem; } }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Mildrid Haugrønning <em>Søndbø</em></a>
+  <a href="index.html#kronikker" class="nav-back">← Tilbake til forsiden</a>
+</nav>
+
+<div class="container">
+  <div class="page-header">
+    <div class="eyebrow">Mine kronikker</div>
+    <h1 class="page-title">Kronikker som ikke er<br><em>publisert på Sykepleien</em></h1>
+    <p class="page-sub">Et utvalg av kronikker og innlegg publisert i andre norske medier.</p>
+  </div>
+
+  <div class="articles-list" id="articlesList"></div>
+</div>
+
+<script>
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
+const articles = [
+  { title: 'Omsorg på ferie',                                                  outlet: 'Klassekampen' },
+  { title: 'Vi trenger handling, ikke flere utvalg',                            outlet: 'Vårt Land' },
+  { title: 'La barmhjertigheten råde',                                          outlet: 'Vårt Land' },
+  { title: 'Helsetjenestenes etiske dilemmaer',                                 outlet: 'Vårt Land' },
+  { title: 'Likestilte forhold for mennesker med nedsatt funksjonsevne',        outlet: 'Dagens Medisin' },
+  { title: 'Vi vet så mye',                                                     outlet: 'Dagens Medisin' },
+  { title: 'Hvordan går det egentlig?',                                         outlet: 'Dagens Medisin' },
+  { title: 'Kjære pårørende, si ifra',                                          outlet: 'Adresseavisa' },
+  { title: 'Etikken etterspør de kloke valgene',                                outlet: 'Dagens Medisin' },
+  { title: 'Vårt felles ansvar',                                                outlet: 'Dagens Medisin' },
+  { title: 'Legelisten',                                                        outlet: 'Dagens Medisin' },
+  { title: 'Estetisk eller etisk sykepleie?',                                   outlet: 'Dagens Medisin' },
+  { title: 'Etikken etterspør de gode valg',                                    outlet: 'Dagens Medisin' },
+  { title: 'Likestilte forhold for mennesker',                                  outlet: 'Dagens Medisin' },
+  { title: 'En refleksjon i kohort-tiden',                                      outlet: 'Dagens Medisin' },
+];
+
+// Group by outlet
+const groups = {};
+articles.forEach((a, i) => {
+  if (!groups[a.outlet]) groups[a.outlet] = [];
+  groups[a.outlet].push({ ...a, num: i + 1 });
+});
+
+const outletOrder = [...new Set(articles.map(a => a.outlet))];
+
+const list = document.getElementById('articlesList');
+outletOrder.forEach(outlet => {
+  const items = groups[outlet];
+  const group = document.createElement('div');
+  group.className = 'outlet-group';
+  group.innerHTML = `
+    <div class="outlet-label">${outlet}</div>
+    ${items.map(a => `
+      <div class="article-item">
+        <span class="article-num">${String(a.num).padStart(2, '0')}</span>
+        <span class="article-title">${a.title}</span>
+      </div>`).join('')}
+  `;
+  list.appendChild(group);
+});
+</script>
+</body>
+</html>
