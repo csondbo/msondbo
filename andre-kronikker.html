@@ -63,6 +63,12 @@ nav {
   font-family: 'Fraunces', serif; font-size: 1.05rem; font-weight: 300;
   color: var(--forest); line-height: 1.4; letter-spacing: -0.01em;
 }
+a.article-title {
+  text-decoration: none; transition: color 0.15s;
+  display: inline-flex; align-items: center; gap: 0.4rem;
+}
+a.article-title:hover { color: var(--terra); }
+a.article-title::after { content: '↗'; font-size: 0.75rem; opacity: 0.5; flex-shrink: 0; }
 
 @media (max-width: 600px) { .container { padding: 0 1.25rem; } nav { padding: 1rem 1.25rem; } }
 </style>
@@ -88,21 +94,21 @@ nav {
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
 const articles = [
-  { title: 'Omsorg på ferie',                                                  outlet: 'Klassekampen' },
-  { title: 'Vi trenger handling, ikke flere utvalg',                            outlet: 'Vårt Land' },
-  { title: 'La barmhjertigheten råde',                                          outlet: 'Vårt Land' },
-  { title: 'Helsetjenestenes etiske dilemmaer',                                 outlet: 'Vårt Land' },
-  { title: 'Likestilte forhold for mennesker med nedsatt funksjonsevne',        outlet: 'Dagens Medisin' },
-  { title: 'Vi vet så mye',                                                     outlet: 'Dagens Medisin' },
-  { title: 'Hvordan går det egentlig?',                                         outlet: 'Dagens Medisin' },
-  { title: 'Kjære pårørende, si ifra',                                          outlet: 'Adresseavisa' },
-  { title: 'Etikken etterspør de kloke valgene',                                outlet: 'Dagens Medisin' },
-  { title: 'Vårt felles ansvar',                                                outlet: 'Dagens Medisin' },
-  { title: 'Legelisten',                                                        outlet: 'Dagens Medisin' },
-  { title: 'Estetisk eller etisk sykepleie?',                                   outlet: 'Dagens Medisin' },
-  { title: 'Etikken etterspør de gode valg',                                    outlet: 'Dagens Medisin' },
-  { title: 'Likestilte forhold for mennesker',                                  outlet: 'Dagens Medisin' },
-  { title: 'En refleksjon i kohort-tiden',                                      outlet: 'Dagens Medisin' },
+  { title: 'Omsorg på ferie',                                                  outlet: 'Klassekampen',   url: null },
+  { title: 'Vi trenger handling, ikke flere utvalg',                            outlet: 'Vårt Land',      url: 'https://www.vl.no/meninger/vi-trenger-handling-ikke-flere-utvalg/10073922' },
+  { title: 'La barmhjertigheten råde',                                          outlet: 'Vårt Land',      url: null },
+  { title: 'Helsetjenestenes etiske dilemmaer',                                 outlet: 'Vårt Land',      url: 'https://www.vl.no/meninger/helsetjenestens-etiske-dilemmaer/1075241' },
+  { title: 'Likestilte forhold for mennesker med nedsatt funksjonsevne',        outlet: 'Dagens Medisin', url: 'https://www.dagensmedisin.no/blogg/likestilte-forhold-for-mennesker-med-funksjonsnedsettelse/131572' },
+  { title: 'Vi vet så mye',                                                     outlet: 'Dagens Medisin', url: 'https://www.dagensmedisin.no/blogg/vi-vet-sa-mye-men-hva-leder-det-til/128861' },
+  { title: 'Hvordan går det egentlig?',                                         outlet: 'Dagens Medisin', url: null },
+  { title: 'Kjære pårørende, si ifra',                                          outlet: 'Adresseavisa',   url: null },
+  { title: 'Etikken etterspør de kloke valgene',                                outlet: 'Dagens Medisin', url: null },
+  { title: 'Vårt felles ansvar',                                                outlet: 'Dagens Medisin', url: 'https://www.dagensmedisin.no/blogg/vart-felles-etiske-ansvar-i-utviklingen-av-helsetjenestene/128501' },
+  { title: 'Legelisten',                                                        outlet: 'Dagens Medisin', url: 'https://www.dagensmedisin.no/debatt-og-kronikk/legelistenno-og-etikken/194862' },
+  { title: 'Estetisk eller etisk sykepleie?',                                   outlet: 'Dagens Medisin', url: 'https://www.dagensmedisin.no/estetisk-eller-etisk-sykepleie/567920' },
+  { title: 'Etikken etterspør de gode valg',                                    outlet: 'Dagens Medisin', url: null },
+  { title: 'Likestilte forhold for mennesker',                                  outlet: 'Dagens Medisin', url: 'https://www.dagensmedisin.no/blogg/likestilte-forhold-for-mennesker-med-funksjonsnedsettelse/131572' },
+  { title: 'En refleksjon i kohort-tiden',                                      outlet: 'Dagens Medisin', url: 'https://www.dagensmedisin.no/blogg/en-refleksjon-i-kohort-tiden/128067' },
 ];
 
 // Group by outlet
@@ -123,7 +129,10 @@ outletOrder.forEach(outlet => {
     <div class="outlet-label">${outlet}</div>
     ${items.map(a => `
       <div class="article-item">
-        <span class="article-title">${a.title}</span>
+        ${a.url
+          ? `<a class="article-title" href="${a.url}" target="_blank" rel="noopener">${a.title}</a>`
+          : `<span class="article-title">${a.title}</span>`
+        }
       </div>`).join('')}
   `;
   list.appendChild(group);
