@@ -386,7 +386,23 @@ section { position: relative; }
 .image-remove-btn:hover { background: rgba(33,21,16,0.9); }
 
 /* ── BLOGG ── */
-#ukens-refleksjon { background: var(--cream); }
+#ukens-refleksjon {
+  background: var(--cream);
+  position: relative;
+  overflow: hidden;
+}
+#ukens-refleksjon::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1455390582262-044cdead277a?fm=jpg&q=80&w=1920&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center 40%;
+  opacity: 0.07;
+  pointer-events: none;
+  z-index: 0;
+}
+#ukens-refleksjon > * { position: relative; z-index: 1; }
 
 .blog-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 3rem; flex-wrap: wrap; gap: 1rem; }
 .blog-title { font-family: 'Fraunces', serif; font-weight: 200; font-size: clamp(2rem, 3vw, 3rem); color: var(--forest); letter-spacing: -0.03em; line-height: 1.1; margin-top: 0.5rem; }
@@ -1149,7 +1165,6 @@ footer { background: var(--forest-deep); padding: 2.5rem 0; }
         Er du helseleder, HR-ansvarlig eller organisasjon som ønsker foredrag, workshops eller konsulentbistand innen etikk og verdibasert ledelse? Ta gjerne kontakt.
       </p>
       <div class="kontakt-actions reveal reveal-delay-3">
-        <a href="mailto:msondbo@hotmail.com" class="btn-primary">Send e-post</a>
         <a href="https://www.linkedin.com/in/mildrid-haugr%C3%B8nning-s%C3%B8ndb%C3%B8-151689ba/" target="_blank" rel="noopener" class="btn-secondary">LinkedIn-profil</a>
       </div>
       <div class="contact-details reveal reveal-delay-4">
