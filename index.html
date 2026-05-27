@@ -1403,6 +1403,7 @@ function renderPosts(posts) {
         </div>
       </div>`;
   }).join('');
+  document.querySelector('.blog-see-all-wrap')?.remove();
   if (hasMore) {
     grid.insertAdjacentHTML('afterend', '<div class="blog-see-all-wrap"><a href="arkiv.html" class="blog-see-all">Se alle innlegg →</a></div>');
   }
