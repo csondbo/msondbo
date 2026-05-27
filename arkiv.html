@@ -33,6 +33,32 @@ nav {
 .nav-logo em { font-style: italic; }
 .nav-back { font-size: 0.8rem; color: var(--terra); text-decoration: none; font-weight: 500; letter-spacing: 0.04em; display: flex; align-items: center; gap: 0.35rem; transition: gap 0.2s; }
 .nav-back:hover { gap: 0.6rem; }
+.btn-login-small {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  font-size: 0.75rem; font-weight: 500; color: rgba(33,21,16,0.4);
+  background: none; border: none; cursor: pointer; font-family: inherit;
+  padding: 0.35rem 0.65rem; border-radius: 100px;
+  transition: color 0.15s, background 0.15s;
+}
+.btn-login-small:hover { color: var(--forest); background: rgba(61,43,32,0.06); }
+.btn-login-small svg { width: 0.85rem; height: 0.85rem; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Admin bar */
+#admin-bar {
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 490;
+  background: var(--forest-deep); padding: 0.75rem 2rem;
+  display: none; align-items: center; gap: 1rem;
+}
+#admin-bar.visible { display: flex; }
+.admin-bar-label { font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; color: rgba(245,240,235,0.3); font-weight: 500; margin-right: auto; }
+.btn-admin {
+  font-size: 0.75rem; font-weight: 500; padding: 0.45rem 1rem; border-radius: 100px;
+  border: none; cursor: pointer; font-family: inherit;
+  transition: transform 0.15s, background 0.15s;
+}
+.btn-admin:hover { transform: scale(1.04); }
+.btn-admin-logout { background: rgba(245,240,235,0.1); color: rgba(245,240,235,0.6); }
+.btn-admin-logout:hover { background: rgba(245,240,235,0.15); }
 
 /* Layout */
 .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
@@ -68,7 +94,18 @@ nav {
 .bc-read { font-size: 0.78rem; color: var(--terra); font-weight: 500; letter-spacing: 0.04em; display: inline-flex; align-items: center; gap: 0.3rem; transition: gap 0.2s; margin-top: auto; }
 .blog-card:hover .bc-read { gap: 0.55rem; }
 
-/* Reader modal */
+/* Delete button on card */
+.card-btn-del {
+  display: none; position: absolute; top: 1rem; right: 1rem;
+  width: 1.75rem; height: 1.75rem; border-radius: 50%; border: none;
+  background: rgba(217,102,79,0.15); color: var(--terra);
+  font-size: 0.7rem; cursor: pointer; align-items: center; justify-content: center;
+  transition: background 0.15s, transform 0.15s;
+}
+.card-btn-del:hover { background: rgba(217,102,79,0.3); transform: scale(1.1); }
+body.admin-mode .card-btn-del { display: flex; }
+
+/* Modal */
 .modal-backdrop {
   display: none; position: fixed; inset: 0; z-index: 600;
   background: rgba(33,21,16,0.6); backdrop-filter: blur(6px);
@@ -77,8 +114,7 @@ nav {
 .modal-backdrop.open { display: flex; }
 .modal {
   background: var(--cream); border-radius: 2rem; padding: 3rem;
-  max-width: 680px; width: 100%; max-height: 85vh; overflow-y: auto;
-  position: relative;
+  max-width: 480px; width: 100%; position: relative;
   box-shadow: 0 32px 80px rgba(33,21,16,0.35), 0 8px 24px rgba(33,21,16,0.15);
 }
 .modal-close {
@@ -89,6 +125,24 @@ nav {
   transition: background 0.15s; color: var(--ink); font-family: inherit;
 }
 .modal-close:hover { background: rgba(61,43,32,0.1); }
+.modal-title { font-family: 'Fraunces', serif; font-size: 1.75rem; font-weight: 300; color: var(--forest); letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+.modal-title em { font-style: italic; }
+.form-label { display: block; font-size: 0.75rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: rgba(33,21,16,0.45); margin-bottom: 0.5rem; }
+.form-input { width: 100%; padding: 0.75rem 1rem; border-radius: 0.75rem; border: 1.5px solid rgba(61,43,32,0.15); background: rgba(61,43,32,0.03); font-family: inherit; font-size: 0.95rem; color: var(--ink); outline: none; transition: border-color 0.15s; }
+.form-input:focus { border-color: var(--terra); }
+.form-error { font-size: 0.8rem; color: var(--terra); margin-top: 0.5rem; display: none; }
+.form-error.show { display: block; }
+.form-row { display: flex; justify-content: flex-end; margin-top: 1.5rem; }
+.btn-primary { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.75rem 1.75rem; border-radius: 100px; border: none; cursor: pointer; background: var(--terra); color: var(--cream); font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 500; text-decoration: none; box-shadow: 0 4px 16px rgba(217,102,79,0.38); transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s, background 0.2s; }
+.btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(217,102,79,0.45); background: #c4553e; }
+
+/* Reader modal */
+.reader-modal {
+  background: var(--cream); border-radius: 2rem; padding: 3rem;
+  max-width: 680px; width: 100%; max-height: 85vh; overflow-y: auto;
+  position: relative;
+  box-shadow: 0 32px 80px rgba(33,21,16,0.35), 0 8px 24px rgba(33,21,16,0.15);
+}
 .post-date { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(33,21,16,0.35); margin-bottom: 0.75rem; font-weight: 500; }
 .post-title { font-family: 'Fraunces', serif; font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 300; color: var(--forest); letter-spacing: -0.025em; line-height: 1.2; margin-bottom: 2rem; }
 .post-body p { font-size: 1rem; line-height: 1.85; color: rgba(33,21,16,0.72); font-weight: 300; margin-bottom: 1.25rem; }
@@ -108,14 +162,25 @@ nav {
 
 <nav>
   <a href="index.html" class="nav-logo">Mildrid Haugrønning <em>Søndbø</em></a>
-  <a href="index.html#ukens-refleksjon" class="nav-back">← Tilbake til Refleksjoner</a>
+  <div style="display:flex;align-items:center;gap:1.5rem;">
+    <a href="index.html#ukens-refleksjon" class="nav-back">← Tilbake til Refleksjoner</a>
+    <button class="btn-login-small" id="loginToggleBtn" onclick="openLoginModal()">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+      <span id="loginBtnLabel">Logg inn</span>
+    </button>
+  </div>
 </nav>
+
+<div id="admin-bar">
+  <span class="admin-bar-label">Admin</span>
+  <button class="btn-admin btn-admin-logout" onclick="logout()">Logg ut</button>
+</div>
 
 <div class="container">
   <div class="page-header">
     <div class="page-header-row">
       <div>
-        <div class="eyebrow">Ukens refleksjon</div>
+        <div class="eyebrow">Refleksjoner</div>
         <h1 class="page-title">Alle <em>innlegg</em></h1>
       </div>
       <div class="post-count" id="postCount"></div>
@@ -126,10 +191,24 @@ nav {
   </div>
 </div>
 
+<!-- Login modal -->
+<div class="modal-backdrop" id="loginModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('loginModal')" aria-label="Lukk">✕</button>
+    <h3 class="modal-title">Logg <em>inn</em></h3>
+    <label class="form-label" for="loginPass">Passord</label>
+    <input class="form-input" type="password" id="loginPass" placeholder="Skriv inn passord" autocomplete="current-password" />
+    <div class="form-error" id="loginError">Feil passord. Prøv igjen.</div>
+    <div class="form-row">
+      <button class="btn-primary" onclick="doLogin()">Logg inn</button>
+    </div>
+  </div>
+</div>
+
 <!-- Reader modal -->
 <div class="modal-backdrop" id="readerModal">
-  <div class="modal">
-    <button class="modal-close" onclick="closeReader()" aria-label="Lukk">✕</button>
+  <div class="reader-modal">
+    <button class="modal-close" onclick="closeModal('readerModal')" aria-label="Lukk">✕</button>
     <div class="post-date" id="readerDate"></div>
     <h2 class="post-title" id="readerTitle"></h2>
     <div class="post-body" id="readerBody"></div>
@@ -140,14 +219,18 @@ nav {
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
 const TOKEN_KEY = 'blog_token';
-function getToken() { return localStorage.getItem(TOKEN_KEY) || ''; }
-function authHeaders() { return { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + getToken() }; }
-function isAdmin() { const t = getToken(); if (!t) return false; try { const p = JSON.parse(atob(t.split('.')[1])); return p.exp * 1000 > Date.now(); } catch { return false; } }
+const getToken  = () => sessionStorage.getItem(TOKEN_KEY);
+const setToken  = t  => sessionStorage.setItem(TOKEN_KEY, t);
+const clearToken= () => sessionStorage.removeItem(TOKEN_KEY);
+const isAdmin   = () => !!getToken();
+
+function authHeaders() {
+  return { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + getToken() };
+}
 
 function formatDate(iso) {
   if (!iso) return '';
-  const d = new Date(iso);
-  return d.toLocaleDateString('nb-NO', { day: 'numeric', month: 'long', year: 'numeric' });
+  return new Date(iso).toLocaleDateString('nb-NO', { day: 'numeric', month: 'long', year: 'numeric' });
 }
 function escHtml(str) {
   if (!str) return '';
@@ -157,8 +240,7 @@ function escHtml(str) {
 let allPosts = [];
 
 function monthKey(iso) {
-  const d = new Date(iso);
-  return d.toLocaleDateString('nb-NO', { month: 'long', year: 'numeric' });
+  return new Date(iso).toLocaleDateString('nb-NO', { month: 'long', year: 'numeric' });
 }
 
 function cardHtml(p) {
@@ -166,6 +248,7 @@ function cardHtml(p) {
   const thumb = p.image_url ? `<img class="bc-thumb" src="${escHtml(p.image_url)}" alt="" loading="lazy">` : '';
   return `
     <div class="blog-card" tabindex="0" onclick="openReader('${p.id}')" onkeydown="if(event.key==='Enter')openReader('${p.id}')">
+      <button class="card-btn-del" title="Slett" onclick="event.stopPropagation(); deletePost('${p.id}')">✕</button>
       ${draft ? '<span class="bc-draft">✎ Utkast</span>' : ''}
       <div class="bc-header">
         <div class="bc-meta">
@@ -183,11 +266,11 @@ function renderPosts(posts) {
   const count = document.getElementById('postCount');
   if (!posts.length) {
     container.innerHTML = '<div class="empty-state">Ingen innlegg ennå.</div>';
+    count.textContent = '';
     return;
   }
   count.textContent = posts.length + ' innlegg';
 
-  // Group by month/year
   const groups = [];
   const seen = {};
   posts.forEach(p => {
@@ -214,6 +297,67 @@ async function loadPosts() {
   renderPosts(allPosts);
 }
 
+function setAdminUI(admin) {
+  document.getElementById('admin-bar').classList.toggle('visible', admin);
+  document.getElementById('loginBtnLabel').textContent = admin ? 'Logg ut' : 'Logg inn';
+  document.body.classList.toggle('admin-mode', admin);
+}
+
+function openModal(id) {
+  document.getElementById(id).classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(id) {
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.querySelectorAll('.modal-backdrop').forEach(el => {
+  el.addEventListener('click', e => { if (e.target === el) closeModal(el.id); });
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') document.querySelectorAll('.modal-backdrop.open').forEach(el => closeModal(el.id));
+});
+
+function openLoginModal() {
+  if (isAdmin()) { logout(); return; }
+  document.getElementById('loginPass').value = '';
+  document.getElementById('loginError').classList.remove('show');
+  openModal('loginModal');
+  setTimeout(() => document.getElementById('loginPass').focus(), 100);
+}
+
+document.getElementById('loginPass').addEventListener('keydown', e => {
+  if (e.key === 'Enter') doLogin();
+});
+
+async function doLogin() {
+  const pw = document.getElementById('loginPass').value;
+  const res = await fetch('/api/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ password: pw }) });
+  if (res.ok) {
+    const { token } = await res.json();
+    setToken(token);
+    closeModal('loginModal');
+    setAdminUI(true);
+    loadPosts();
+  } else {
+    document.getElementById('loginError').classList.add('show');
+    document.getElementById('loginPass').select();
+  }
+}
+
+async function logout() {
+  await fetch('/api/logout', { method: 'POST', headers: authHeaders() }).catch(() => {});
+  clearToken();
+  setAdminUI(false);
+  loadPosts();
+}
+
+async function deletePost(id) {
+  if (!confirm('Slett dette innlegget?')) return;
+  const res = await fetch(`/api/posts/${id}`, { method: 'DELETE', headers: authHeaders() });
+  if (res.ok) loadPosts();
+}
+
 function openReader(id) {
   const post = allPosts.find(p => p.id === id);
   if (!post) return;
@@ -225,20 +369,11 @@ function openReader(id) {
     .split(/\n\n+/)
     .map(p => `<p>${escHtml(p.trim()).replace(/\n/g, '<br>')}</p>`)
     .join('') + imgHtml;
-  document.getElementById('readerModal').classList.add('open');
-  document.body.style.overflow = 'hidden';
+  openModal('readerModal');
 }
 
-function closeReader() {
-  document.getElementById('readerModal').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-document.getElementById('readerModal').addEventListener('click', e => {
-  if (e.target === e.currentTarget) closeReader();
-});
-document.addEventListener('keydown', e => { if (e.key === 'Escape') closeReader(); });
-
+// Init
+setAdminUI(isAdmin());
 loadPosts();
 </script>
 </body>
