@@ -352,19 +352,21 @@ section { position: relative; }
   background: var(--terra); flex-shrink: 0; opacity: 0.7;
 }
 
-.tilbyr-topics { list-style: none; counter-reset: topic-counter; margin: 0; padding: 0; }
+.tilbyr-topic-groups { display: flex; flex-direction: column; gap: 1.75rem; }
+.tilbyr-topic-group-label {
+  font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+  font-weight: 600; color: var(--terra); margin-bottom: 0.35rem;
+}
+.tilbyr-topics { list-style: none; margin: 0; padding: 0; }
 .tilbyr-topics li {
-  counter-increment: topic-counter;
-  display: flex; gap: 1.25rem; align-items: baseline;
-  padding: 1rem 0; border-bottom: 1px solid rgba(61,43,32,0.07);
+  display: flex; gap: 0.75rem; align-items: baseline;
+  padding: 0.65rem 0; border-bottom: 1px solid rgba(61,43,32,0.07);
   font-size: 0.92rem; line-height: 1.6; color: rgba(33,21,16,0.72); font-weight: 300;
 }
 .tilbyr-topics li:first-child { padding-top: 0; }
 .tilbyr-topics li:last-child { border-bottom: none; padding-bottom: 0; }
 .tilbyr-topics li::before {
-  content: counter(topic-counter, decimal-leading-zero);
-  color: var(--terra); font-family: 'Fraunces', serif; font-size: 0.8rem;
-  font-weight: 300; flex-shrink: 0; opacity: 0.7; min-width: 1.5rem;
+  content: '—'; color: var(--terra); font-size: 0.75rem; flex-shrink: 0; opacity: 0.6;
 }
 
 .tilbyr-cta { margin-top: 3rem; text-align: center; }
@@ -783,7 +785,7 @@ footer { background: var(--forest-deep); padding: 2.5rem 0; }
 <!-- ═══════════════════ NAV ═══════════════════ -->
 <nav id="nav">
   <div class="nav-wrap">
-    <a href="#" class="nav-logo">Mildrid Haugrønning <em>Søndbø</em></a>
+    <a href="#" class="nav-logo">Etikkprat.no <em>:</em> Mildrid Haugrønning Søndbø</a>
     <div class="nav-links">
       <a href="#om-meg">Om meg</a>
       <a href="#ukens-refleksjon">Refleksjoner</a>
@@ -899,13 +901,24 @@ footer { background: var(--forest-deep); padding: 2.5rem 0; }
       </div>
       <div class="tilbyr-col tilbyr-col-topics">
         <div class="tilbyr-col-label">Aktuelle tema</div>
-        <ol class="tilbyr-topics">
-          <li>Arbeidsmiljøloven — leders og arbeidstakers plikter og rettigheter</li>
-          <li>Forskjell på rollene tillitsvalgt og verneombud</li>
-          <li>Hva innebærer det å sikre en helsefremmende arbeidssituasjon?</li>
-          <li>Etablering av etiske refleksjonsgrupper</li>
-          <li>Systematisk etisk refleksjon</li>
-        </ol>
+        <div class="tilbyr-topic-groups">
+          <div>
+            <div class="tilbyr-topic-group-label">Etikk</div>
+            <ul class="tilbyr-topics">
+              <li>Etablere refleksjonsgrupper</li>
+              <li>Et innblikk i yrkesetiske retningslinjer</li>
+              <li>Benytte SME-modellen til systematisk refleksjon</li>
+            </ul>
+          </div>
+          <div>
+            <div class="tilbyr-topic-group-label">Arbeidsmiljøloven</div>
+            <ul class="tilbyr-topics">
+              <li>Ledere og ansattes plikter og rettigheter</li>
+              <li>Verneombud og tillitsvalgte, ulike roller</li>
+              <li>Arbeidslivets etikk, en vei som må skapes i fellesskap</li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
     <div class="tilbyr-cta reveal reveal-delay-3">
@@ -1116,13 +1129,16 @@ footer { background: var(--forest-deep); padding: 2.5rem 0; }
     <div class="er-layout">
       <div class="er-left">
         <p class="er-intro reveal reveal-delay-2">
-          Systematisk etisk refleksjon er ikke forbeholdt filosofer eller etikkeksperter — det er et praktisk verktøy enhver leder og helsearbeider kan ta i bruk i hverdagen. En god modell for etisk refleksjon gir struktur til de vanskelige samtalene og hjelper oss å finne fram til kloke valg i krevende situasjoner.
+          Systematisk etisk refleksjon er ikke forbeholdt filosofer eller etikkeksperter – det er et praktisk verktøy enhver leder og helsearbeider kan ta i bruk i hverdagen.
         </p>
         <p class="er-body reveal reveal-delay-2">
-          SME-modellen (Systematisk Moralsk/Etisk refleksjon) er utviklet ved Universitetet i Oslo og er et av de mest brukte verktøyene i norske helsetjenester. Modellen leder oss gjennom en strukturert prosess: fra å identifisere det etiske problemet, kartlegge hvem som er involvert og hvilke verdier som står på spill, til å vurdere ulike handlingsalternativer og begrunne valget vi tar.
+          En god modell for etisk refleksjon gir struktur til de vanskelige samtalene og hjelper oss å finne frem til kloke valg i krevende situasjoner.
         </p>
         <p class="er-body reveal reveal-delay-2">
-          Gjennom mine år som leder av Rådet for sykepleieetikk har jeg sett hvordan denne type systematisk refleksjon kan løfte kvaliteten på beslutninger, styrke arbeidsmiljøet og gi ansatte et felles språk for etiske dilemmaer. Å etablere etiske refleksjonsgrupper på arbeidsplassen er et av de mest virkningsfulle tiltakene en leder kan gjøre.
+          SME-modellen er utviklet ved Universitetet i Oslo og veileder oss gjennom en strukturert prosess – fra å identifisere det etiske problemet til å kartlegge hvem som er involvert og hvilke verdier som står på spill.
+        </p>
+        <p class="er-body reveal reveal-delay-2">
+          Gjennom mine år som leder i Rådet for sykepleieetikk har jeg sett hvordan systematisk refleksjon av denne typen kan løfte kvaliteten på beslutninger.
         </p>
         <a href="https://www.med.uio.no/helsam/tjenester/kunnskap/etikk-helsetjenesten/sme-modellen/" target="_blank" rel="noopener" class="er-link-box reveal reveal-delay-3">
           <div>
