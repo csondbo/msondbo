@@ -399,7 +399,7 @@ section { position: relative; }
 .blog-title { font-family: 'Fraunces', serif; font-weight: 200; font-size: clamp(2rem, 3vw, 3rem); color: var(--forest); letter-spacing: -0.03em; line-height: 1.1; margin-top: 0.5rem; }
 .blog-title em { font-style: italic; }
 
-.blog-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+.blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
 
 .blog-card {
   background: var(--cream-warm); border-radius: 1.5rem; padding: 2rem;
@@ -755,6 +755,7 @@ footer { background: var(--forest-deep); padding: 2.5rem 0; }
   .tilbyr-header { grid-template-columns: 1fr; gap: 1rem; }
   .kronikker-grid { grid-template-columns: 1fr 1fr; }
   .kronikkk-card-featured { grid-column: span 2; }
+  .blog-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 768px) {
   .nav-links { display: none; }
