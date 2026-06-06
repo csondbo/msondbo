@@ -28,8 +28,16 @@ nav {
   border-bottom: 1px solid rgba(61,43,32,0.07);
   padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between;
 }
-.nav-logo { font-family: 'Fraunces', serif; font-weight: 300; font-size: 1.05rem; color: var(--forest); text-decoration: none; letter-spacing: -0.01em; }
-.nav-logo em { font-style: italic; }
+.nav-logo {
+  font-family: 'DM Sans', system-ui, sans-serif; font-weight: 500; font-size: 0.78rem;
+  letter-spacing: 0.02em; text-decoration: none; white-space: nowrap;
+  background: var(--terra); color: var(--cream);
+  padding: 0.55rem 1.25rem; border-radius: 100px;
+  box-shadow: 0 2px 12px rgba(217,102,79,0.32);
+  transition: transform 0.2s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.2s ease, background 0.2s;
+  display: inline-block;
+}
+.nav-logo:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(217,102,79,0.42); background: #c4553e; }
 .nav-back { font-size: 0.8rem; color: var(--terra); text-decoration: none; font-weight: 500; letter-spacing: 0.04em; display: flex; align-items: center; gap: 0.35rem; transition: gap 0.2s; }
 .nav-back:hover { gap: 0.6rem; }
 
@@ -76,7 +84,7 @@ a.article-title::after { content: '↗'; font-size: 0.75rem; opacity: 0.5; flex-
 <body>
 
 <nav>
-  <a href="index.html" class="nav-logo">Mildrid Haugrønning <em>Søndbø</em></a>
+  <a href="index.html" class="nav-logo">Etikkprat.no er Mildrid Haugrønning Søndbø</a>
   <a href="index.html#kronikker" class="nav-back">← Tilbake til forsiden</a>
 </nav>
 
@@ -94,20 +102,22 @@ a.article-title::after { content: '↗'; font-size: 0.75rem; opacity: 0.5; flex-
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
 const articles = [
-  { title: 'Omsorg på ferie',                                                  outlet: 'Klassekampen',   url: null },
-  { title: 'Vi trenger handling, ikke flere utvalg',                            outlet: 'Vårt Land',      url: 'https://www.vl.no/meninger/vi-trenger-handling-ikke-flere-utvalg/10073922' },
-  { title: 'La barmhjertigheten råde',                                          outlet: 'Vårt Land',      url: null },
-  { title: 'Helsetjenestenes etiske dilemmaer',                                 outlet: 'Vårt Land',      url: 'https://www.vl.no/meninger/helsetjenestens-etiske-dilemmaer/1075241' },
-  { title: 'Likestilte forhold for mennesker med nedsatt funksjonsevne',        outlet: 'Dagens Medisin', url: 'https://www.dagensmedisin.no/blogg/likestilte-forhold-for-mennesker-med-funksjonsnedsettelse/131572' },
-  { title: 'Vi vet så mye',                                                     outlet: 'Dagens Medisin', url: 'https://www.dagensmedisin.no/blogg/vi-vet-sa-mye-men-hva-leder-det-til/128861' },
-  { title: 'Hvordan går det egentlig?',                                         outlet: 'Dagens Medisin', url: 'https://www.dagensmedisin.no/blogg/hvordan-gar-det-egentlig/128030' },
-  { title: 'Kjære pårørende, si ifra',                                          outlet: 'Adresseavisa',   url: null },
-  { title: 'Etikken etterspør de kloke valgene',                                outlet: 'Dagens Medisin', url: 'https://www.dagensmedisin.no/etikken-etterspor-de-kloke-valgene/545075' },
-  { title: 'Vårt felles ansvar',                                                outlet: 'Dagens Medisin', url: 'https://www.dagensmedisin.no/blogg/vart-felles-etiske-ansvar-i-utviklingen-av-helsetjenestene/128501' },
-  { title: 'Legelisten',                                                        outlet: 'Dagens Medisin', url: 'https://www.dagensmedisin.no/debatt-og-kronikk/legelistenno-og-etikken/194862' },
-  { title: 'Estetisk eller etisk sykepleie?',                                   outlet: 'Dagens Medisin', url: 'https://www.dagensmedisin.no/estetisk-eller-etisk-sykepleie/567920' },
-  { title: 'Likestilte forhold for mennesker',                                  outlet: 'Dagens Medisin', url: 'https://www.dagensmedisin.no/blogg/likestilte-forhold-for-mennesker-med-funksjonsnedsettelse/131572' },
-  { title: 'En refleksjon i kohort-tiden',                                      outlet: 'Dagens Medisin', url: 'https://www.dagensmedisin.no/blogg/en-refleksjon-i-kohort-tiden/128067' },
+  { title: 'Omsorg på ferie',                                                          outlet: 'Klassekampen',   url: null },
+  { title: 'Vi trenger handling, ikke flere utvalg',                                    outlet: 'Vårt Land',      url: 'https://www.vl.no/meninger/vi-trenger-handling-ikke-flere-utvalg/10073922' },
+  { title: 'Vi kan la barmhjertigheten råde',                                           outlet: 'Vårt Land',      url: 'https://www.vl.no/verdidebatt/vi-kan-la-barmhjertigheten-rade-om-enn-bare-for-noen-maneder/781707' },
+  { title: 'Helsetjenestenes etiske dilemmaer',                                         outlet: 'Vårt Land',      url: 'https://www.vl.no/meninger/helsetjenestens-etiske-dilemmaer/1075241' },
+  { title: 'Kjære pårørende, si ifra',                                                  outlet: 'Adresseavisa',   url: null },
+  { title: 'Likestilte forhold for mennesker med funksjonsnedsettelse',                 outlet: 'Dagens Medisin', url: 'https://www.dagensmedisin.no/blogg/likestilte-forhold-for-mennesker-med-funksjonsnedsettelse/131572' },
+  { title: 'Vi vet så mye, men hva leder det til?',                                     outlet: 'Dagens Medisin', url: 'https://www.dagensmedisin.no/blogg/vi-vet-sa-mye-men-hva-leder-det-til/128861' },
+  { title: 'Hvordan går det egentlig?',                                                 outlet: 'Dagens Medisin', url: 'https://www.dagensmedisin.no/blogg/hvordan-gar-det-egentlig/128030' },
+  { title: 'Etikken etterspør de kloke valgene',                                        outlet: 'Dagens Medisin', url: 'https://www.dagensmedisin.no/etikken-etterspor-de-kloke-valgene/545075' },
+  { title: 'Etikken etterspør de gode valg',                                            outlet: 'Dagens Medisin', url: 'https://www.dagensmedisin.no/etikken-etterspor-de-kloke-valgene/545075' },
+  { title: 'Vårt felles etiske ansvar i utviklingen av helsetjenestene',                outlet: 'Dagens Medisin', url: 'https://www.dagensmedisin.no/blogg/vart-felles-etiske-ansvar-i-utviklingen-av-helsetjenestene/128501' },
+  { title: 'Legelisten.no – og etikken',                                                outlet: 'Dagens Medisin', url: 'https://www.dagensmedisin.no/debatt-og-kronikk/legelistenno-og-etikken/194862' },
+  { title: 'Estetisk eller etisk sykepleie?',                                           outlet: 'Dagens Medisin', url: 'https://www.dagensmedisin.no/estetisk-eller-etisk-sykepleie/567920' },
+  { title: 'Prinsipper til hinder for en trygg helsetjeneste',                          outlet: 'Dagens Medisin', url: 'https://www.dagensmedisin.no/blogg/prinsipper-til-hinder-for-en-trygg-helsetjeneste/322670' },
+  { title: 'En refleksjon i kohorttiden',                                               outlet: 'Dagens Medisin', url: 'https://www.dagensmedisin.no/blogg/en-refleksjon-i-kohort-tiden/128067' },
+  { title: 'Helsepersonells plikt til å jobbe og ansvaret for å informere',             outlet: 'Dagens Medisin', url: 'https://www.dagensmedisin.no/debatt-og-kronikk/helsepersonells-plikt-til-a-jobbe-og-ansvaret-for-a-informere/380430' },
 ];
 
 // Group by outlet
